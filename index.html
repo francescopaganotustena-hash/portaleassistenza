@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistenza Clienti Studio81 SRL - Inserisci Ticket</title>
-    <meta name="description" content="Portale per la richiesta di assistenza tecnica">
-    <meta name="keywords" content="assistenza, supporto, ticket, helpdesk">
-    <meta name="author" content="Studio81 SRL">
-    <meta property="og:title" content="Assistenza Clienti Studio81 SRL">
-    <meta property="og:description" content="Inserisci una richiesta di assistenza">
+    <title>Studio81 SRL - Soluzioni Digitali Innovative</title>
+    <meta name="description" content="Studio81 SRL - Azienda leader nelle soluzioni digitali. Servizi di sviluppo software, assistenza tecnica e consulenza IT.">
+    <meta name="keywords" content="studio81, software, assistenza, IT, sviluppo, consulenza">
+    <meta property="og:title" content="Studio81 SRL - Soluzioni Digitali Innovative">
+    <meta property="og:description" content="Azienda leader nelle soluzioni digitali">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="css/style.css">
@@ -16,22 +15,212 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .landing-hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .landing-hero .hero-bg-elements {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .landing-hero .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        .landing-hero .company-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .landing-hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        .landing-hero h1 .highlight {
+            color: var(--accent);
+        }
+        .landing-hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+        .landing-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .landing-cta .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 8px;
+        }
+        .landing-cta .btn-primary {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+        .landing-cta .btn-primary:hover {
+            background: #00b8e0;
+        }
+        .landing-cta .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        .landing-cta .btn-outline:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        /* Features Section */
+        .features-section {
+            padding: 5rem 2rem;
+            background: var(--primary-dark);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        .feature-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        /* About Section */
+        .about-section {
+            padding: 5rem 2rem;
+            background: var(--bg-white);
+        }
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+        .about-content h2 span {
+            color: var(--accent);
+        }
+        .about-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .stat-item {
+            background: var(--primary-dark);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-item .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .stat-item .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        /* Contact CTA */
+        .contact-cta {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #002a30 100%);
+            text-align: center;
+        }
+        .contact-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        .contact-cta p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 768px) {
+            .landing-hero h1 {
+                font-size: 2.5rem;
+            }
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
-    
+
     <header class="header">
         <nav class="nav">
             <a href="index.html" class="logo">
-                <i class="fas fa-headset"></i> Assistenza
+                <i class="fas fa-code"></i> Studio81
             </a>
             <button class="hamburger" aria-label="Apri menu">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#ticket" class="active">Nuovo Ticket</a></li>
-                <li><a href="#stato">Stato Ticket</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#servizi">Servizi</a></li>
+                <li><a href="#chi-siamo">Chi Siamo</a></li>
+                <li><a href="#contatti">Contatti</a></li>
                 <li id="nav-login"><a href="login.html" class="btn-login">Accedi</a></li>
                 <li id="nav-register"><a href="registrazione.html" class="btn-register">Registrati</a></li>
             </ul>
@@ -40,142 +229,110 @@
 
     <main id="main-content">
         <!-- Hero Section -->
-        <section class="hero hero-small">
+        <section class="hero landing-hero">
             <div class="hero-bg-elements">
                 <div class="hero-blob hero-blob-1"></div>
                 <div class="hero-blob hero-blob-2"></div>
                 <div class="hero-blob hero-blob-3"></div>
             </div>
             <div class="hero-content">
-                <p class="hero-label">Supporto Tecnico</p>
-                <h1>Come possiamo <span class="highlight">aiutarti?</span></h1>
-                <p class="subtitle">Compila il modulo sottostante e il nostro team ti risponderà nel minor tempo possibile</p>
-            </div>
-        </section>
-
-        <!-- Form Ticket Section -->
-        <section id="ticket" class="ticket-form-section">
-            <div class="form-container fade-in">
-                <form id="ticket-form" class="ticket-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nome"><i class="fas fa-user"></i> Nome</label>
-                            <input type="text" id="nome" name="nome" required placeholder="Il tuo nome">
-                        </div>
-                        <div class="form-group">
-                            <label for="cognome"><i class="fas fa-user"></i> Cognome</label>
-                            <input type="text" id="cognome" name="cognome" required placeholder="Il tuo cognome">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                        <input type="email" id="email" name="email" required placeholder="la-tua-email@esempio.it">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono"><i class="fas fa-phone"></i> Telefono (opzionale)</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="+39 123 456 7890">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="categoria"><i class="fas fa-tag"></i> Categoria</label>
-                        <select id="categoria" name="categoria" required>
-                            <option value="">Seleziona una categoria</option>
-                            <option value="tecnico">Problema Tecnico</option>
-                            <option value="fatturazione">Fatturazione</option>
-                            <option value="account">Problema Account</option>
-                            <option value="ordine">Stato Ordine</option>
-                            <option value="altro">Altro</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="priorita"><i class="fas fa-exclamation-circle"></i> Priorità</label>
-                        <select id="priorita" name="priorita" required>
-                            <option value="bassa">Bassa - Richiesta informativa</option>
-                            <option value="media" selected>Media - Problema che non blocca l'attività</option>
-                            <option value="alta">Alta - Problema urgente che blocca l'attività</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="oggetto"><i class="fas fa-heading"></i> Oggetto</label>
-                        <input type="text" id="oggetto" name="oggetto" required placeholder="Breve descrizione del problema">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="messaggio"><i class="fas fa-comment-alt"></i> Descrizione del problema</label>
-                        <textarea id="messaggio" name="messaggio" rows="6" required placeholder="Descrivi in dettaglio il problema che stai riscontrando..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="allegato"><i class="fas fa-paperclip"></i> Allegato (opzionale)</label>
-                        <div class="file-upload">
-                            <input type="file" id="allegato" name="allegato" accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.txt">
-                            <label for="allegato" class="file-upload-label">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Scegli file o trascinalo qui</span>
-                            </label>
-                        </div>
-                        <p class="file-info">Formati accettati: JPG, PNG, GIF, PDF, DOC, DOCX, TXT (max 10MB)</p>
-                    </div>
-
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="privacy" name="privacy" required>
-                        <label for="privacy">Ho letto e accetto la <a href="#">Privacy Policy</a></label>
-                    </div>
-
-                    <button type="submit" class="btn btn-submit">
-                        <i class="fas fa-paper-plane"></i> Invia Ticket
-                    </button>
-                </form>
-
-                <!-- Messaggio di conferma (nascosto di default) -->
-                <div id="success-message" class="success-message" style="display: none;">
-                    <div class="success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h2>Ticket Inviato!</h2>
-                    <p>Grazie per averci contattato. Il tuo ticket è stato registrato con successo.</p>
-                    <div class="ticket-id">
-                        <span>Numero Ticket:</span>
-                        <strong id="ticket-number"></strong>
-                    </div>
-                    <p class="success-note">Riceverai una conferma via email. Il nostro team ti risponderà entro 2-6 ore.</p>
-                    <button type="button" class="btn" onclick="resetForm()">Invia un altro ticket</button>
+                <div class="company-badge">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Azienda leader nel settore IT</span>
+                </div>
+                <h1>Trasformiamo le tue idee in <span class="highlight">soluzioni digitali</span></h1>
+                <p class="subtitle">Da Studio81 SRL trovi assistenza tecnica specializzata, sviluppo software su misura e consulenza IT per far crescere il tuo business.</p>
+                <div class="landing-cta">
+                    <a href="registrazione.html" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Richiedi Assistenza
+                    </a>
+                    <a href="#servizi" class="btn btn-outline">
+                        <i class="fas fa-info-circle"></i> Scopri i Servizi
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Stato Ticket Section -->
-        <section id="stato" class="check-ticket-section">
-            <h2>Controlla lo stato del tuo ticket</h2>
-            <p class="section-subtitle">Inserisci il numero del ticket per verificare lo stato della tua richiesta</p>
-            <div class="check-ticket-form fade-in">
-                <form id="check-ticket-form">
-                    <div class="form-group">
-                        <label for="ticket-number-check"><i class="fas fa-ticket-alt"></i> Numero Ticket</label>
-                        <input type="text" id="ticket-number-check" name="ticket-number-check" placeholder="es. TKT-2026-001234">
+        <!-- Features Section -->
+        <section id="servizi" class="features-section">
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
                     </div>
-                    <button type="submit" class="btn btn-secondary">
-                        <i class="fas fa-search"></i> Verifica Stato
-                    </button>
-                </form>
+                    <h3>Supporto Tecnico</h3>
+                    <p>Assistenza rapida e professionale per risolvere qualsiasi problema tecnico. Il nostro team è disponibile per aiutarti.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Sviluppo Software</h3>
+                    <p>Realizziamo applicazioni web e mobile su misura per le tue esigenze specifiche.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Soluzioni cloud scalabili e sicure per modernizzare le tue infrastrutture informatiche.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Sicurezza IT</h3>
+                    <p>Proteggiamo i tuoi dati e sistemi con le più avanzate tecnologie di sicurezza informatica.</p>
+                </div>
             </div>
-            <div id="ticket-status-result" class="ticket-status-result" style="display: none;">
-                <div class="status-card">
-                    <div class="status-header">
-                        <h3>Ticket <span id="status-ticket-id"></span></h3>
-                        <span id="status-badge" class="status-badge"></span>
+        </section>
+
+        <!-- About Section -->
+        <section id="chi-siamo" class="about-section">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2>Chi è <span>Studio81 SRL</span></h2>
+                    <p>Siamo un'azienda italiana specializzata nelle soluzioni digitali. Da anni aiutiamo PMI e grandi aziende a trasformare le loro operazioni attraverso la tecnologia.</p>
+                    <p>Il nostro team di esperti combina competenze tecniche avanzate con una profonda comprensione delle esigenze business dei clienti.</p>
+                    <p>Crediamo che la tecnologia debba essere un motore di crescita, non un ostacolo. Per questo offriamo soluzioni intuitive, efficienti e accessibili.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Clienti Soddisfatti</div>
                     </div>
-                    <div class="status-details">
-                        <p><strong>Oggetto:</strong> <span id="status-subject"></span></p>
-                        <p><strong>Data:</strong> <span id="status-date"></span></p>
-                        <p><strong>Ultimo aggiornamento:</strong> <span id="status-update"></span></p>
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Anni di Esperienza</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Progetti Realizzati</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Supporto Disponibile</div>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section id="contatti" class="contact-cta">
+            <h2>Hai bisogno di assistenza?</h2>
+            <p>Registrazione rapida per accedere al nostro sistema di ticket e ricevere supporto personalizzato.</p>
+            <div class="landing-cta" style="margin-bottom: 2rem;">
+                <a href="registrazione.html" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Registrati Ora
+                </a>
+                <a href="login.html" class="btn btn-outline">
+                    <i class="fas fa-sign-in-alt"></i> Accedi
+                </a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.8;">
+                <i class="fas fa-envelope"></i> info@studio81.it &nbsp;&nbsp;
+                <i class="fas fa-phone"></i> +39 02 1234567
+            </p>
         </section>
 
         <!-- FAQ Section -->
@@ -187,23 +344,23 @@
                     <p>Il nostro team risponde entro 2-6 ore in base alla priorità del ticket.</p>
                 </article>
                 <article class="faq-item fade-in">
-                    <h3><i class="fas fa-question-circle"></i> Posso modificare un ticket già inviato?</h3>
+                    <h3><i class="fas fa-question-circle"></i> Come posso modificare un ticket già inviato?</h3>
                     <p>Una volta inviato, il ticket non può essere modificato. Puoi però inviare un nuovo ticket con le informazioni aggiornate.</p>
-                </article>
-                <article class="faq-item fade-in">
-                    <h3><i class="fas fa-question-circle"></i> Come posso chiudere un ticket?</h3>
-                    <p>Puoi chiudere un ticket rispondendo alla email di conferma e indicando che il problema è stato risolto.</p>
                 </article>
                 <article class="faq-item fade-in">
                     <h3><i class="fas fa-question-circle"></i> Quali file posso allegare?</h3>
                     <p>Puoi allegare immagini (JPG, PNG, GIF), documenti (PDF, DOC, DOCX) e file di testo (TXT) fino a 10MB.</p>
+                </article>
+                <article class="faq-item fade-in">
+                    <h3><i class="fas fa-question-circle"></i> Come posso chiudere un ticket?</h3>
+                    <p>Puoi chiudere un ticket rispondendo alla email di conferma e indicando che il problema è stato risolto.</p>
                 </article>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>© 2026 Assistenza Clienti. Tutti i diritti riservati.</p>
+        <p>© 2026 Studio81 SRL. Tutti i diritti riservati.</p>
         <div class="footer-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Termini di Servizio</a>
