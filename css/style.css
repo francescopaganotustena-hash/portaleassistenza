@@ -1,23 +1,34 @@
 /* ========================================
-   CSS Variables - Colori del Template
+   CSS Variables - Tema Quorbit (Spaziale)
    ======================================== */
 :root {
-    --primary-dark: #001c20;
-    --bg-light: #e8f4f8;
-    --bg-white: #1a3a47;
-    --accent: #00d4ff;
-    --gray-medium: #5a7a8a;
-    --gray-light: #3d5a6a;
-    --text-dark: #e8f4f8;
-    --text-light: #a8c4d4;
-    --accent-secondary: #a78bfa;
-    --max-width: 1280px;
+    /* Colori tema spaziale Quorbit */
+    --deep-space:    #0A0E1A;
+    --orbit-blue:    #4F8EF7;
+    --stellar-light: #A3C4FB;
+    --pure-white:    #FFFFFF;
+    --midnight-navy: #1C2540;
+    --card-bg:       #111827;
+    --border:        rgba(79,142,247,0.18);
 
-    /* Colori aggiuntivi per il portale assistenza */
+    /* Colori di stato */
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
     --info: #3b82f6;
+
+    --max-width: 1280px;
+
+    /* Mantengo per compatibilità */
+    --primary-dark: var(--deep-space);
+    --bg-light: var(--card-bg);
+    --bg-white: var(--midnight-navy);
+    --accent: var(--orbit-blue);
+    --gray-medium: var(--stellar-light);
+    --gray-light: rgba(79,142,247,0.3);
+    --text-dark: var(--pure-white);
+    --text-light: var(--stellar-light);
+    --accent-secondary: #a78bfa;
 }
 
 /* ========================================
@@ -73,15 +84,15 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 28, 32, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 26, 0.82);
+    backdrop-filter: blur(14px);
     z-index: 1000;
-    box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
+    border-bottom: 1px solid var(--border);
     transition: box-shadow 0.3s ease;
 }
 
 .header.scrolled {
-    box-shadow: 0 4px 30px rgba(0, 212, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(79, 142, 247, 0.15);
 }
 
 .nav {
@@ -94,22 +105,27 @@ body {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--pure-white);
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
     transition: color 0.3s ease;
 }
 
 .logo:hover {
-    color: var(--accent-secondary);
+    color: var(--orbit-blue);
 }
 
 .logo i {
     font-size: 1.25rem;
+}
+
+.logo .dot {
+    color: var(--orbit-blue);
 }
 
 /* Hamburger Menu */
@@ -214,8 +230,8 @@ body {
 .hero-blob-1 {
     width: 400px;
     height: 400px;
-    background: var(--accent);
-    opacity: 0.15;
+    background: var(--orbit-blue);
+    opacity: 0.13;
     top: -100px;
     left: -100px;
     animation-delay: 0s;
@@ -234,8 +250,8 @@ body {
 .hero-blob-3 {
     width: 250px;
     height: 250px;
-    background: var(--accent);
-    opacity: 0.1;
+    background: radial-gradient(ellipse, rgba(79,142,247,0.13) 0%, transparent 70%);
+    opacity: 0.15;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -481,16 +497,17 @@ body {
 }
 
 .btn-submit {
-    background: var(--accent);
-    color: var(--primary-dark);
+    background: var(--orbit-blue);
+    color: #fff;
     width: 100%;
     margin-top: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
 }
 
 .btn-submit:hover {
-    background: #00b8e6;
+    opacity: 0.87;
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
 }
 
 .btn-secondary {
@@ -709,10 +726,26 @@ body {
    Footer
    ======================================== */
 .footer {
-    background: rgba(0, 20, 25, 0.9);
-    padding: 2rem;
-    text-align: center;
-    border-top: 1px solid var(--gray-light);
+    background: var(--midnight-navy);
+    padding: 2.5rem 5vw;
+    text-align: left;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--pure-white);
+}
+
+.footer-logo .dot {
+    color: var(--orbit-blue);
 }
 
 .footer p {
@@ -728,13 +761,14 @@ body {
 }
 
 .footer-links a {
-    color: var(--text-light);
+    color: var(--stellar-light);
     text-decoration: none;
-    transition: color 0.3s ease;
+    font-size: 0.85rem;
+    transition: color 0.2s;
 }
 
 .footer-links a:hover {
-    color: var(--accent);
+    color: var(--orbit-blue);
 }
 
 /* ========================================

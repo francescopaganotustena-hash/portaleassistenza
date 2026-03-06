@@ -39,8 +39,8 @@ body.auth-page {
 .auth-blob-1 {
     width: 500px;
     height: 500px;
-    background: var(--accent);
-    opacity: 0.1;
+    background: var(--orbit-blue);
+    opacity: 0.13;
     top: -200px;
     left: -200px;
 }
@@ -78,14 +78,19 @@ body.auth-page {
 }
 
 .auth-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent);
+    font-size: 1.45rem;
+    color: var(--pure-white);
     text-decoration: none;
     margin-bottom: 1rem;
+}
+
+.auth-logo .dot {
+    color: var(--orbit-blue);
 }
 
 .auth-logo i {

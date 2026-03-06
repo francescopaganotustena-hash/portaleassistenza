@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dettaglio Ticket - Portale assistenza Studio81 SRL</title>
-    <meta name="description" content="Visualizza dettagli ticket di assistenza">
-    <meta property="og:title" content="Dettaglio Ticket - Portale assistenza Studio81 SRL">
+    <title>Dettaglio Ticket - Quorbit</title>
+    <meta name="description" content="Visualizza dettagli ticket di assistenza Quorbit">
+    <meta property="og:title" content="Dettaglio Ticket - Quorbit">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        :root {
+            --orbit-blue: #4F8EF7;
+            --deep-space: #0A0E1A;
+            --midnight-navy: #1C2540;
+            --stellar-light: #A3C4FB;
+            --pure-white: #FFFFFF;
+            --card-bg: #111827;
+            --border: rgba(79,142,247,0.18);
+        }
+        body {
+            background: var(--deep-space);
+            color: var(--pure-white);
+            font-family: 'Inter', sans-serif;
+        }
         .ticket-detail-page {
             max-width: 900px;
             margin: 0 auto;
@@ -142,8 +156,7 @@
     <!-- Dashboard Header -->
     <header class="dashboard-header">
         <a href="dashboard.html" class="dashboard-brand">
-            <i class="fas fa-headset"></i>
-            Portale Assistenza Studio81 SRL
+            QUORBIT<span class="dot">.</span>
         </a>
 
         <div class="dashboard-user-menu">

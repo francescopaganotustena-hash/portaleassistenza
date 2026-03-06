@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accedi - Portale assistenza Studio81 SRL</title>
-    <meta name="description" content="Accedi al portale assistenza Studio81 SRL per gestire i tuoi ticket">
-    <meta name="keywords" content="login, accesso, assistenza, supporto">
-    <meta property="og:title" content="Accedi - Portale assistenza Studio81 SRL">
+    <title>Accedi - Quorbit</title>
+    <meta name="description" content="Accedi al portale Quorbit per gestire i tuoi ticket di assistenza">
+    <meta name="keywords" content="login, accesso, assistenza, supporto, quorbit">
+    <meta property="og:title" content="Accedi - Quorbit">
     <meta property="og:description" content="Accedi al portale per gestire i tuoi ticket">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -14,8 +14,24 @@
     <link rel="stylesheet" href="css/auth.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --orbit-blue: #4F8EF7;
+            --deep-space: #0A0E1A;
+            --midnight-navy: #1C2540;
+            --stellar-light: #A3C4FB;
+            --pure-white: #FFFFFF;
+            --card-bg: #111827;
+            --border: rgba(79,142,247,0.18);
+        }
+        body {
+            background: var(--deep-space);
+            color: var(--pure-white);
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 <body class="auth-page">
     <div class="auth-bg-elements">
@@ -27,8 +43,7 @@
         <div class="auth-card">
             <div class="auth-header">
                 <a href="index.html" class="auth-logo">
-                    <i class="fas fa-headset"></i>
-                    Assistenza
+                    QUORBIT<span class="dot">.</span>
                 </a>
                 <h1>Benvenuto</h1>
                 <p>Accedi al tuo account per gestire i ticket</p>

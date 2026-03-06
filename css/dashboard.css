@@ -36,24 +36,29 @@
     left: 0;
     right: 0;
     height: 70px;
-    background: rgba(0, 28, 32, 0.98);
-    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 26, 0.82);
+    backdrop-filter: blur(14px);
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    border-bottom: 1px solid var(--gray-light);
+    border-bottom: 1px solid var(--border);
 }
 
 .dashboard-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--accent);
+    gap: 0.5rem;
+    font-size: 1.35rem;
+    color: var(--pure-white);
     text-decoration: none;
+}
+
+.dashboard-brand .dot {
+    color: var(--orbit-blue);
 }
 
 .dashboard-brand i {
@@ -203,8 +208,8 @@
 }
 
 .sidebar-menu a.active {
-    background: rgba(0, 212, 255, 0.1);
-    color: var(--accent);
+    background: rgba(79, 142, 247, 0.12);
+    color: var(--orbit-blue);
 }
 
 .sidebar-menu a i {
@@ -247,8 +252,8 @@
 }
 
 .stat-icon.primary {
-    background: rgba(0, 212, 255, 0.15);
-    color: var(--accent);
+    background: rgba(79, 142, 247, 0.15);
+    color: var(--orbit-blue);
 }
 
 .stat-icon.warning {
