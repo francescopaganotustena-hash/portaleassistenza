@@ -4,11 +4,14 @@
 
 // Configurazione API
 const API_CONFIG = {
+    // Backend su Render.com (produzione)
+    BASE_URL: 'https://portaleassistenza.onrender.com/api',
+
     // Per sviluppo locale
     // BASE_URL: 'http://localhost:8000/api',
 
     // Per rete aziendale (IP: 10.0.0.103)
-    BASE_URL: 'http://10.0.0.103:8000/api',
+    // BASE_URL: 'http://10.0.0.103:8000/api',
     
     // Timeout richieste
     TIMEOUT: 30000,
