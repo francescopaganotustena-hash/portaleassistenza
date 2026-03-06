@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accedi - Portale assistenza Studio81 SRL</title>
+    <meta name="description" content="Accedi al portale assistenza Studio81 SRL per gestire i tuoi ticket">
+    <meta name="keywords" content="login, accesso, assistenza, supporto">
+    <meta property="og:title" content="Accedi - Portale assistenza Studio81 SRL">
+    <meta property="og:description" content="Accedi al portale per gestire i tuoi ticket">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-bg-elements">
+        <div class="auth-blob auth-blob-1"></div>
+        <div class="auth-blob auth-blob-2"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="index.html" class="auth-logo">
+                    <i class="fas fa-headset"></i>
+                    Assistenza
+                </a>
+                <h1>Benvenuto</h1>
+                <p>Accedi al tuo account per gestire i ticket</p>
+            </div>
+
+            <div id="error-message" class="form-error"></div>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" id="email" name="email" required
+                           placeholder="la-tua-email@esempio.it"
+                           autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" required
+                               placeholder="La tua password"
+                               autocomplete="current-password">
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Ricordami</label>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-sign-in-alt"></i> Accedi
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Non hai un account? <a href="registrazione.html">Registrati</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js?v=20260306"></script>
+    <script src="js/config.js?v=20260306"></script>
+    <script src="js/api-client.js?v=20260306"></script>
+    <script src="js/auth.js?v=20260306"></script>
+    <script>
+        // Reindirizza se già loggato
+        if (window.userManager && window.userManager.isLoggedIn()) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistenza Clienti Studio81 SRL - Inserisci Ticket</title>
+    <meta name="description" content="Portale per la richiesta di assistenza tecnica">
+    <meta name="keywords" content="assistenza, supporto, ticket, helpdesk">
+    <meta name="author" content="Studio81 SRL">
+    <meta property="og:title" content="Assistenza Clienti Studio81 SRL">
+    <meta property="og:description" content="Inserisci una richiesta di assistenza">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+    
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <i class="fas fa-headset"></i> Assistenza
+            </a>
+            <button class="hamburger" aria-label="Apri menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#ticket" class="active">Nuovo Ticket</a></li>
+                <li><a href="#stato">Stato Ticket</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li id="nav-login"><a href="login.html" class="btn-login">Accedi</a></li>
+                <li id="nav-register"><a href="registrazione.html" class="btn-register">Registrati</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero hero-small">
+            <div class="hero-bg-elements">
+                <div class="hero-blob hero-blob-1"></div>
+                <div class="hero-blob hero-blob-2"></div>
+                <div class="hero-blob hero-blob-3"></div>
+            </div>
+            <div class="hero-content">
+                <p class="hero-label">Supporto Tecnico</p>
+                <h1>Come possiamo <span class="highlight">aiutarti?</span></h1>
+                <p class="subtitle">Compila il modulo sottostante e il nostro team ti risponderà nel minor tempo possibile</p>
+            </div>
+        </section>
+
+        <!-- Form Ticket Section -->
+        <section id="ticket" class="ticket-form-section">
+            <div class="form-container fade-in">
+                <form id="ticket-form" class="ticket-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome"><i class="fas fa-user"></i> Nome</label>
+                            <input type="text" id="nome" name="nome" required placeholder="Il tuo nome">
+                        </div>
+                        <div class="form-group">
+                            <label for="cognome"><i class="fas fa-user"></i> Cognome</label>
+                            <input type="text" id="cognome" name="cognome" required placeholder="Il tuo cognome">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" required placeholder="la-tua-email@esempio.it">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono"><i class="fas fa-phone"></i> Telefono (opzionale)</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+39 123 456 7890">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria"><i class="fas fa-tag"></i> Categoria</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Seleziona una categoria</option>
+                            <option value="tecnico">Problema Tecnico</option>
+                            <option value="fatturazione">Fatturazione</option>
+                            <option value="account">Problema Account</option>
+                            <option value="ordine">Stato Ordine</option>
+                            <option value="altro">Altro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priorita"><i class="fas fa-exclamation-circle"></i> Priorità</label>
+                        <select id="priorita" name="priorita" required>
+                            <option value="bassa">Bassa - Richiesta informativa</option>
+                            <option value="media" selected>Media - Problema che non blocca l'attività</option>
+                            <option value="alta">Alta - Problema urgente che blocca l'attività</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="oggetto"><i class="fas fa-heading"></i> Oggetto</label>
+                        <input type="text" id="oggetto" name="oggetto" required placeholder="Breve descrizione del problema">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messaggio"><i class="fas fa-comment-alt"></i> Descrizione del problema</label>
+                        <textarea id="messaggio" name="messaggio" rows="6" required placeholder="Descrivi in dettaglio il problema che stai riscontrando..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="allegato"><i class="fas fa-paperclip"></i> Allegato (opzionale)</label>
+                        <div class="file-upload">
+                            <input type="file" id="allegato" name="allegato" accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.txt">
+                            <label for="allegato" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Scegli file o trascinalo qui</span>
+                            </label>
+                        </div>
+                        <p class="file-info">Formati accettati: JPG, PNG, GIF, PDF, DOC, DOCX, TXT (max 10MB)</p>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">Ho letto e accetto la <a href="#">Privacy Policy</a></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Invia Ticket
+                    </button>
+                </form>
+
+                <!-- Messaggio di conferma (nascosto di default) -->
+                <div id="success-message" class="success-message" style="display: none;">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Ticket Inviato!</h2>
+                    <p>Grazie per averci contattato. Il tuo ticket è stato registrato con successo.</p>
+                    <div class="ticket-id">
+                        <span>Numero Ticket:</span>
+                        <strong id="ticket-number"></strong>
+                    </div>
+                    <p class="success-note">Riceverai una conferma via email. Il nostro team ti risponderà entro 2-6 ore.</p>
+                    <button type="button" class="btn" onclick="resetForm()">Invia un altro ticket</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stato Ticket Section -->
+        <section id="stato" class="check-ticket-section">
+            <h2>Controlla lo stato del tuo ticket</h2>
+            <p class="section-subtitle">Inserisci il numero del ticket per verificare lo stato della tua richiesta</p>
+            <div class="check-ticket-form fade-in">
+                <form id="check-ticket-form">
+                    <div class="form-group">
+                        <label for="ticket-number-check"><i class="fas fa-ticket-alt"></i> Numero Ticket</label>
+                        <input type="text" id="ticket-number-check" name="ticket-number-check" placeholder="es. TKT-2026-001234">
+                    </div>
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-search"></i> Verifica Stato
+                    </button>
+                </form>
+            </div>
+            <div id="ticket-status-result" class="ticket-status-result" style="display: none;">
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Ticket <span id="status-ticket-id"></span></h3>
+                        <span id="status-badge" class="status-badge"></span>
+                    </div>
+                    <div class="status-details">
+                        <p><strong>Oggetto:</strong> <span id="status-subject"></span></p>
+                        <p><strong>Data:</strong> <span id="status-date"></span></p>
+                        <p><strong>Ultimo aggiornamento:</strong> <span id="status-update"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <h2>Domande Frequenti</h2>
+            <div class="faq-grid">
+                <article class="faq-item fade-in">
+                    <h3><i class="fas fa-question-circle"></i> Quanto tempo ci vuole per ricevere una risposta?</h3>
+                    <p>Il nostro team risponde entro 2-6 ore in base alla priorità del ticket.</p>
+                </article>
+                <article class="faq-item fade-in">
+                    <h3><i class="fas fa-question-circle"></i> Posso modificare un ticket già inviato?</h3>
+                    <p>Una volta inviato, il ticket non può essere modificato. Puoi però inviare un nuovo ticket con le informazioni aggiornate.</p>
+                </article>
+                <article class="faq-item fade-in">
+                    <h3><i class="fas fa-question-circle"></i> Come posso chiudere un ticket?</h3>
+                    <p>Puoi chiudere un ticket rispondendo alla email di conferma e indicando che il problema è stato risolto.</p>
+                </article>
+                <article class="faq-item fade-in">
+                    <h3><i class="fas fa-question-circle"></i> Quali file posso allegare?</h3>
+                    <p>Puoi allegare immagini (JPG, PNG, GIF), documenti (PDF, DOC, DOCX) e file di testo (TXT) fino a 10MB.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Assistenza Clienti. Tutti i diritti riservati.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Termini di Servizio</a>
+            <a href="#">Contatti</a>
+        </div>
+    </footer>
+
+    <script src="js/storage.js?v=20260306"></script>
+    <script src="js/config.js?v=20260306"></script>
+    <script src="js/api-client.js?v=20260306"></script>
+    <script src="js/main.js?v=20260306"></script>
+</body>
+</html>

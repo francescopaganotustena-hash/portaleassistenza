@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Ticket - Portale assistenza Studio81 SRL</title>
+    <meta name="description" content="Visualizza dettagli ticket di assistenza">
+    <meta property="og:title" content="Dettaglio Ticket - Portale assistenza Studio81 SRL">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .ticket-detail-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding-top: 100px;
+            padding-bottom: 2rem;
+        }
+        .ticket-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .ticket-detail-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+        .ticket-detail-header .ticket-id {
+            font-size: 1.1rem;
+        }
+        .ticket-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--primary-dark);
+            border-radius: 12px;
+        }
+        .ticket-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .ticket-info-item label {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        .ticket-info-item span {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .messages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .message-card {
+            background: var(--primary-dark);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--gray-light);
+        }
+        .message-card.support {
+            border-left: 3px solid var(--accent);
+        }
+        .message-card.user {
+            border-left: 3px solid var(--accent-secondary);
+        }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .message-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .message-author i {
+            color: var(--accent);
+        }
+        .message-date {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        .message-content {
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        .add-message-form {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .add-message-form h4 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        .add-message-form textarea {
+            width: 100%;
+            background: var(--primary-dark);
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-dark);
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 120px;
+        }
+        .add-message-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <a href="dashboard.html" class="dashboard-brand">
+            <i class="fas fa-headset"></i>
+            Portale Assistenza Studio81 SRL
+        </a>
+
+        <div class="dashboard-user-menu">
+            <a href="dashboard.html" class="btn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+            <div class="dashboard-user-info" onclick="toggleUserDropdown()">
+                <div class="user-avatar" id="user-avatar">U</div>
+                <div class="user-details">
+                    <span class="user-name" id="user-name">Utente</span>
+                    <span class="user-email" id="user-email">utente@email.it</span>
+                </div>
+                <i class="fas fa-chevron-down" style="color: var(--text-light); font-size: 0.75rem;"></i>
+            </div>
+            <div class="user-dropdown" id="user-dropdown">
+                <a href="profilo.html"><i class="fas fa-user"></i> Il mio Profilo</a>
+                <a href="index.html"><i class="fas fa-home"></i> Torna al Sito</a>
+                <div class="divider"></div>
+                <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Esci</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="ticket-detail-page" id="main-content">
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Torna ai tuoi ticket
+        </a>
+
+        <div id="ticket-container">
+            <!-- Contenuto caricato dinamicamente -->
+        </div>
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!window.userManager.isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            loadUserInfo();
+            await loadTicketDetail();
+        });
+
+        async function loadTicketDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ticketId = urlParams.get('id');
+
+            if (!ticketId) {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            try {
+                const ticket = await window.ticketManager.getTicket(ticketId);
+
+                if (!ticket) {
+                    document.getElementById('ticket-container').innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Ticket non trovato</h3>
+                            <p>Il ticket richiesto non esiste o non ti appartiene</p>
+                            <a href="dashboard.html" class="btn">Torna alla Dashboard</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                renderTicket(ticket);
+            } catch (error) {
+                console.error('Errore caricamento ticket:', error);
+                document.getElementById('ticket-container').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Errore caricamento</h3>
+                        <p>Non è stato possibile caricare il ticket</p>
+                        <a href="dashboard.html" class="btn">Torna alla Dashboard</a>
+                    </div>
+                `;
+            }
+        }
+
+        function renderTicket(ticket) {
+            const dataCreazione = new Date(ticket.data_creazione || ticket.dataCreazione).toLocaleString('it-IT');
+            const ultimoAggiornamento = new Date(ticket.ultimo_aggiornamento || ticket.ultimoAggiornamento || ticket.data_creazione).toLocaleString('it-IT');
+
+            const statoLabel = {
+                'apertura': 'Aperto',
+                'aperto': 'Aperto',
+                'in-lavorazione': 'In Lavorazione',
+                'in_lavorazione': 'In Lavorazione',
+                'risolto': 'Risolto',
+                'chiuso': 'Chiuso'
+            };
+
+            const categoryLabel = {
+                'tecnico': 'Problema Tecnico',
+                'fatturazione': 'Fatturazione',
+                'account': 'Problema Account',
+                'ordine': 'Stato Ordine',
+                'altro': 'Altro'
+            };
+
+            const priorityLabel = {
+                'bassa': 'Bassa',
+                'media': 'Media',
+                'alta': 'Alta'
+            };
+
+            // Gestisci messaggi - supporta sia formato API che locale
+            const messaggi = ticket.messaggi || ticket.messages || [];
+
+            document.getElementById('ticket-container').innerHTML = `
+                <div class="dashboard-content">
+                    <div class="ticket-detail-header">
+                        <div>
+                            <h2>${escapeHtml(ticket.oggetto || ticket.title)}</h2>
+                            <span class="ticket-id" style="color: var(--accent);">${ticket.id}</span>
+                        </div>
+                        <span class="ticket-badge ${ticket.stato}">${statoLabel[ticket.stato] || ticket.stato}</span>
+                    </div>
+
+                    <div class="ticket-info-grid">
+                        <div class="ticket-info-item">
+                            <label>Categoria</label>
+                            <span>${categoryLabel[ticket.categoria || ticket.category] || ticket.categoria || 'Altro'}</span>
+                        </div>
+                        <div class="ticket-info-item">
+                            <label>Priorità</label>
+                            <span>${priorityLabel[ticket.priorita || ticket.priority] || ticket.priorita || 'Media'}</span>
+                        </div>
+                        <div class="ticket-info-item">
+                            <label>Data Creazione</label>
+                            <span>${dataCreazione}</span>
+                        </div>
+                        <div class="ticket-info-item">
+                            <label>Ultimo Aggiornamento</label>
+                            <span>${ultimoAggiornamento}</span>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Cronologia Messaggi</h3>
+                    <div class="messages-container" id="messages-container">
+                        ${messaggi.length > 0 ? messaggi.map(msg => `
+                            <div class="message-card ${msg.autore === 'utente' || msg.autore === 'user' ? 'user' : 'support'}">
+                                <div class="message-header">
+                                    <span class="message-author">
+                                        <i class="fas fa-${msg.autore === 'utente' || msg.autore === 'user' ? 'user' : 'headset'}"></i>
+                                        ${msg.autore === 'utente' || msg.autore === 'user' ? 'Tu' : 'Supporto'}
+                                    </span>
+                                    <span class="message-date">${new Date(msg.data || msg.data_creazione).toLocaleString('it-IT')}</span>
+                                </div>
+                                <div class="message-content">${escapeHtml(msg.messaggio || msg.contenuto)}</div>
+                            </div>
+                        `).join('') : '<p style="color: var(--text-light);">Nessun messaggio ancora</p>'}
+                    </div>
+
+                    ${ticket.stato !== 'chiuso' && ticket.stato !== 'risolto' ? `
+                    <div class="add-message-form">
+                        <h4><i class="fas fa-reply"></i> Aggiungi una risposta</h4>
+                        <form onsubmit="addMessage(event, '${ticket.id}')">
+                            <textarea id="new-message" name="messaggio" placeholder="Scrivi la tua risposta..." required></textarea>
+                            <button type="submit" class="btn" style="margin-top: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Invia
+                            </button>
+                        </form>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        async function addMessage(e, ticketId) {
+            e.preventDefault();
+
+            const messaggio = document.getElementById('new-message').value.trim();
+
+            if (!messaggio) return;
+
+            const result = await window.ticketManager.addMessage(ticketId, messaggio);
+
+            if (result.success) {
+                // Ricarica la pagina per mostrare il nuovo messaggio
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

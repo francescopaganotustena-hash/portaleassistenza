@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrati - Portale Assistenza Studio81 SRL</title>
+    <meta name="description" content="Registrati al portale assistenza Studio81 SRL per richiedere supporto">
+    <meta name="keywords" content="registrazione, account, assistenza, supporto">
+    <meta property="og:title" content="Registrati - Portale Assistenza Studio81 SRL">
+    <meta property="og:description" content="Crea il tuo account per richiedere assistenza">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-bg-elements">
+        <div class="auth-blob auth-blob-1"></div>
+        <div class="auth-blob auth-blob-2"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="index.html" class="auth-logo">
+                    <i class="fas fa-headset"></i>
+                    Portale Assistenza Studio81 SRL
+                </a>
+                <h1>Crea Account</h1>
+                <p>Registrati per accedere al portale assistenza Studio81 SRL</p>
+            </div>
+
+            <div id="error-message" class="form-error"></div>
+            <div id="success-message" class="form-success"></div>
+
+            <form id="register-form" class="auth-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">
+                            <i class="fas fa-user"></i> Nome
+                        </label>
+                        <input type="text" id="nome" name="nome" required
+                               placeholder="Il tuo nome"
+                               autocomplete="given-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cognome">
+                            <i class="fas fa-user"></i> Cognome
+                        </label>
+                        <input type="text" id="cognome" name="cognome" required
+                               placeholder="Il tuo cognome"
+                               autocomplete="family-name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" id="email" name="email" required
+                           placeholder="la-tua-email@esempio.it"
+                           autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" required
+                               placeholder="Scegli una password"
+                               autocomplete="new-password"
+                               oninput="checkPasswordStrength(this.value)">
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-requirements">
+                        <p>La password deve contenere:</p>
+                        <ul>
+                            <li id="req-length"><i class="fas fa-circle"></i> Almeno 8 caratteri</li>
+                            <li id="req-number"><i class="fas fa-circle"></i> Almeno un numero</li>
+                            <li id="req-letter"><i class="fas fa-circle"></i> Almeno una lettera</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">
+                        <i class="fas fa-lock"></i> Conferma Password
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="confirm-password" name="confirm-password" required
+                               placeholder="Ripeti la password"
+                               autocomplete="new-password">
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="privacy" name="privacy" required>
+                    <label for="privacy">Ho letto e accetto la <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submit-btn" disabled>
+                    <i class="fas fa-user-plus"></i> Registrati
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Hai già un account? <a href="login.html">Accedi</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js?v=20260306"></script>
+    <script src="js/config.js?v=20260306"></script>
+    <script src="js/api-client.js?v=20260306"></script>
+    <script src="js/auth.js?v=20260306"></script>
+    <script>
+        // Reindirizza se già loggato
+        if (window.userManager && window.userManager.isLoggedIn()) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

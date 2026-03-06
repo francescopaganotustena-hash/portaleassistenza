@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Portale Assistenza Studio81 SRL</title>
+    <meta name="description" content="Gestisci i tuoi ticket di assistenza">
+    <meta property="og:title" content="Dashboard - Portale Assistenza Studio81 SRL">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <a href="dashboard.html" class="dashboard-brand">
+            <i class="fas fa-headset"></i>
+            Portale Assistenza Studio81 SRL
+        </a>
+
+        <div class="dashboard-user-menu">
+            <button class="mobile-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="dashboard-user-info" onclick="toggleUserDropdown()">
+                <div class="user-avatar" id="user-avatar">U</div>
+                <div class="user-details">
+                    <span class="user-name" id="user-name">Utente</span>
+                    <span class="user-email" id="user-email">utente@email.it</span>
+                </div>
+                <i class="fas fa-chevron-down" style="color: var(--text-light); font-size: 0.75rem;"></i>
+            </div>
+            <div class="user-dropdown" id="user-dropdown">
+                <a href="profilo.html"><i class="fas fa-user"></i> Il mio Profilo</a>
+                <a href="index.html"><i class="fas fa-home"></i> Torna al Sito</a>
+                <div class="divider"></div>
+                <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Esci</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <div class="sidebar-section">
+                    <ul class="sidebar-menu">
+                        <li><a href="dashboard.html" class="active"><i class="fas fa-ticket-alt"></i> I miei Ticket</a></li>
+                        <li><a href="index.html#ticket"><i class="fas fa-plus-circle"></i> Nuovo Ticket</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-section">
+                    <ul class="sidebar-menu">
+                        <li><a href="profilo.html"><i class="fas fa-user-cog"></i> Profilo</a></li>
+                        <li><a href="index.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon primary">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-totali">0</div>
+                        <div class="stat-label">Ticket Totali</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon info">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-aperti">0</div>
+                        <div class="stat-label">Aperti</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon warning">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-in-lavorazione">0</div>
+                        <div class="stat-label">In Lavorazione</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-risolti">0</div>
+                        <div class="stat-label">Risolti</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="content-header">
+                    <h2>I tuoi Ticket</h2>
+                    <div class="content-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="search-tickets" placeholder="Cerca ticket..." oninput="filterTickets()">
+                        </div>
+                        <select class="filter-select" id="filter-state" onchange="filterTickets()">
+                            <option value="tutti">Tutti gli stati</option>
+                            <option value="apertura">Aperti</option>
+                            <option value="in-lavorazione">In lavorazione</option>
+                            <option value="risolto">Risolti</option>
+                        </select>
+                        <select class="filter-select" id="filter-category" onchange="filterTickets()">
+                            <option value="tutte">Tutte le categorie</option>
+                            <option value="tecnico">Problema Tecnico</option>
+                            <option value="fatturazione">Fatturazione</option>
+                            <option value="account">Problema Account</option>
+                            <option value="ordine">Stato Ordine</option>
+                            <option value="altro">Altro</option>
+                        </select>
+                        <a href="index.html#ticket" class="btn">
+                            <i class="fas fa-plus"></i> Nuovo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ticket-list" id="ticket-list">
+                    <!-- Ticket items will be rendered here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

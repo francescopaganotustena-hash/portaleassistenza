@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo - Portale Assistenza Studio81 SRL</title>
+    <meta name="description" content="Gestisci il tuo profilo utente">
+    <meta property="og:title" content="Profilo - Portale Assistenza Studio81 SRL">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .profile-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 100px;
+            padding-bottom: 2rem;
+        }
+        .profile-page .dashboard-content {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <a href="dashboard.html" class="dashboard-brand">
+            <i class="fas fa-headset"></i>
+            Portale Assistenza Studio81 SRL
+        </a>
+
+        <div class="dashboard-user-menu">
+            <a href="dashboard.html" class="btn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+            <div class="dashboard-user-info" onclick="toggleUserDropdown()">
+                <div class="user-avatar" id="user-avatar">U</div>
+                <div class="user-details">
+                    <span class="user-name" id="user-name">Utente</span>
+                    <span class="user-email" id="user-email">utente@email.it</span>
+                </div>
+                <i class="fas fa-chevron-down" style="color: var(--text-light); font-size: 0.75rem;"></i>
+            </div>
+            <div class="user-dropdown" id="user-dropdown">
+                <a href="profilo.html"><i class="fas fa-user"></i> Il mio Profilo</a>
+                <a href="index.html"><i class="fas fa-home"></i> Torna al Sito</a>
+                <div class="divider"></div>
+                <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Esci</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-page">
+        <div id="message-container"></div>
+
+        <!-- Info Profilo -->
+        <section class="dashboard-content">
+            <h3><i class="fas fa-user"></i> Informazioni Profilo</h3>
+            <form id="profile-form" onsubmit="updateProfile(event)">
+                <div class="profile-grid">
+                    <div class="profile-field">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="profile-field">
+                        <label for="cognome">Cognome</label>
+                        <input type="text" id="cognome" name="cognome" required>
+                    </div>
+                    <div class="profile-field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="profile-field">
+                        <label for="telefono">Telefono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+39 123 456 7890">
+                    </div>
+                </div>
+                <button type="submit" class="btn" style="margin-top: 1.5rem;">
+                    <i class="fas fa-save"></i> Salva Modifiche
+                </button>
+            </form>
+        </section>
+
+        <!-- Cambio Password -->
+        <section class="dashboard-content">
+            <h3><i class="fas fa-lock"></i> Cambia Password</h3>
+            <form id="password-form" onsubmit="changePassword(event)">
+                <div class="profile-grid">
+                    <div class="profile-field">
+                        <label for="old-password">Password Attuale</label>
+                        <input type="password" id="old-password" name="old-password" required>
+                    </div>
+                    <div class="profile-field">
+                        <label for="new-password">Nuova Password</label>
+                        <input type="password" id="new-password" name="new-password" required>
+                    </div>
+                    <div class="profile-field">
+                        <label for="confirm-password">Conferma Nuova Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn" style="margin-top: 1.5rem;">
+                    <i class="fas fa-key"></i> Cambia Password
+                </button>
+            </form>
+        </section>
+
+        <!-- Info Account -->
+        <section class="dashboard-content">
+            <h3><i class="fas fa-info-circle"></i> Informazioni Account</h3>
+            <div class="profile-grid">
+                <div class="profile-field">
+                    <label>Data Registrazione</label>
+                    <input type="text" id="data-registrazione" disabled>
+                </div>
+                <div class="profile-field">
+                    <label>Ultimo Accesso</label>
+                    <input type="text" id="ultimo-accesso" disabled>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Carica dati utente
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!window.userManager.isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const user = window.userManager.getCurrentUser();
+            if (user) {
+                document.getElementById('nome').value = user.nome || '';
+                document.getElementById('cognome').value = user.cognome || '';
+                document.getElementById('email').value = user.email || '';
+                document.getElementById('telefono').value = user.telefono || '';
+
+                // Load avatar
+                if (user.nome) {
+                    document.getElementById('user-avatar').textContent = user.nome.charAt(0).toUpperCase();
+                    document.getElementById('user-name').textContent = `${user.nome} ${user.cognome || ''}`;
+                }
+                document.getElementById('user-email').textContent = user.email || '';
+
+                // Carica info account
+                const userFull = window.userManager.getUserById(user.id);
+                if (userFull) {
+                    const dataReg = userFull.dataRegistrazione ? new Date(userFull.dataRegistrazione).toLocaleDateString('it-IT') : '-';
+                    const ultimoAccesso = userFull.ultimoAccesso ? new Date(userFull.ultimoAccesso).toLocaleString('it-IT') : 'Primo accesso';
+
+                    document.getElementById('data-registrazione').value = dataReg;
+                    document.getElementById('ultimo-accesso').value = ultimoAccesso;
+                }
+            }
+        });
+
+        // Aggiorna profilo
+        function updateProfile(e) {
+            e.preventDefault();
+
+            const user = window.userManager.getCurrentUser();
+            if (!user) return;
+
+            const result = window.userManager.updateProfile(user.id, {
+                nome: document.getElementById('nome').value.trim(),
+                cognome: document.getElementById('cognome').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telefono: document.getElementById('telefono').value.trim()
+            });
+
+            if (result.success) {
+                showMessage('Profilo aggiornato con successo!', 'success');
+                // Aggiorna UI
+                document.getElementById('user-name').textContent = `${result.user.nome} ${result.user.cognome || ''}`;
+                document.getElementById('user-email').textContent = result.user.email;
+                document.getElementById('user-avatar').textContent = result.user.nome.charAt(0).toUpperCase();
+            } else {
+                showMessage(result.message, 'error');
+            }
+        }
+
+        // Cambia password
+        function changePassword(e) {
+            e.preventDefault();
+
+            const user = window.userManager.getCurrentUser();
+            if (!user) return;
+
+            const oldPassword = document.getElementById('old-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newPassword !== confirmPassword) {
+                showMessage('Le password non corrispondono', 'error');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                showMessage('La nuova password deve essere di almeno 8 caratteri', 'error');
+                return;
+            }
+
+            const result = window.userManager.changePassword(user.id, oldPassword, newPassword);
+
+            if (result.success) {
+                showMessage('Password cambiata con successo!', 'success');
+                document.getElementById('password-form').reset();
+            } else {
+                showMessage(result.message, 'error');
+            }
+        }
+
+        // Mostra messaggio
+        function showMessage(text, type) {
+            const container = document.getElementById('message-container');
+            container.innerHTML = `
+                <div class="form-${type} show" style="margin-bottom: 1rem; max-width: 800px;">${text}</div>
+            `;
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
