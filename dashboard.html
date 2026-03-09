@@ -65,7 +65,7 @@
                 <div class="sidebar-section">
                     <ul class="sidebar-menu">
                         <li><a href="dashboard.html" class="active"><i class="fas fa-ticket-alt"></i> I miei Ticket</a></li>
-                        <li><a href="index.html#ticket"><i class="fas fa-plus-circle"></i> Nuovo Ticket</a></li>
+                        <li><a href="#" id="sidebar-new-ticket"><i class="fas fa-plus-circle"></i> Nuovo Ticket</a></li>
                     </ul>
                 </div>
                 <div class="sidebar-section">
@@ -140,11 +140,108 @@
                             <option value="ordine">Stato Ordine</option>
                             <option value="altro">Altro</option>
                         </select>
-                        <a href="index.html#ticket" class="btn">
+                        <button id="show-create-ticket-form" class="btn">
                             <i class="fas fa-plus"></i> Nuovo
-                        </a>
+                        </button>
                     </div>
                 </div>
+
+                <!-- Ticket Creation Form Section -->
+                <section id="ticket-form-section" class="ticket-form-section" style="display: none; padding: 2rem; background: var(--card-bg); border-radius: 12px; margin-bottom: 2rem;">
+                    <h3>Crea nuovo ticket</h3>
+                    <form id="ticket-form" class="ticket-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome"><i class="fas fa-user"></i> Nome</label>
+                                <input type="text" id="nome" name="nome" required placeholder="Il tuo nome">
+                            </div>
+                            <div class="form-group">
+                                <label for="cognome"><i class="fas fa-user"></i> Cognome</label>
+                                <input type="text" id="cognome" name="cognome" required placeholder="Il tuo cognome">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                            <input type="email" id="email" name="email" required placeholder="la-tua-email@esempio.it">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono"><i class="fas fa-phone"></i> Telefono (opzionale)</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+39 123 456 7890">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoria"><i class="fas fa-tag"></i> Categoria</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="">Seleziona una categoria</option>
+                                <option value="tecnico">Problema Tecnico</option>
+                                <option value="fatturazione">Fatturazione</option>
+                                <option value="account">Problema Account</option>
+                                <option value="ordine">Stato Ordine</option>
+                                <option value="altro">Altro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priorita"><i class="fas fa-exclamation-circle"></i> Priorità</label>
+                            <select id="priorita" name="priorita" required>
+                                <option value="bassa">Bassa - Richiesta informativa</option>
+                                <option value="media" selected>Media - Problema che non blocca l'attività</option>
+                                <option value="alta">Alta - Problema urgente che blocca l'attività</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="oggetto"><i class="fas fa-heading"></i> Oggetto</label>
+                            <input type="text" id="oggetto" name="oggetto" required placeholder="Breve descrizione del problema">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="messaggio"><i class="fas fa-comment-alt"></i> Descrizione del problema</label>
+                            <textarea id="messaggio" name="messaggio" rows="6" required placeholder="Descrivi in dettaglio il problema..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="allegato"><i class="fas fa-paperclip"></i> Allegato (opzionale)</label>
+                            <div class="file-upload">
+                                <input type="file" id="allegato" name="allegato" accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.txt">
+                                <label for="allegato" class="file-upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Scegli file o trascinalo qui</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">Ho letto e accetto la <a href="#">Privacy Policy</a></label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fas fa-paper-plane"></i> Invia Ticket
+                            </button>
+                            <button type="button" id="cancel-ticket-form" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Annulla
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="success-message" class="success-message" style="display: none;">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2>Ticket Inviato!</h2>
+                        <p>Grazie per averci contattato. Il tuo ticket è stato registrato.</p>
+                        <div class="ticket-id">
+                            <span>Numero Ticket:</span>
+                            <strong id="ticket-number"></strong>
+                        </div>
+                        <p class="success-note">Riceverai una conferma via email. Il nostro team ti risponderà entro 2-6 ore.</p>
+                        <button type="button" class="btn" onclick="resetForm()">Invia un altro ticket</button>
+                    </div>
+                </section>
 
                 <div class="ticket-list" id="ticket-list">
                     <!-- Ticket items will be rendered here -->

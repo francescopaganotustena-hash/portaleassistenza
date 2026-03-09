@@ -1,6 +1,7 @@
 """
 Configurazione applicazione FastAPI
 """
+import os
 from pydantic_settings import BaseSettings
 from typing import List
 
@@ -32,7 +33,7 @@ class Settings(BaseSettings):
 
     # Upload
     max_file_size: int = 10485760  # 10MB
-    upload_dir: str = "./uploads"
+    upload_dir: str = os.path.abspath("./uploads")  # Percorso assoluto per la directory di upload
     allowed_extensions: List[str] = ["jpg", "jpeg", "png", "gif", "pdf", "doc", "docx", "txt"]
 
     # CORS

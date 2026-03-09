@@ -19,11 +19,31 @@ PortaileAssistenza/
 │   ├── auth.css           # Stili pagine autenticazione
 │   └── dashboard.css      # Stili dashboard e profilo
 ├── js/
+│   ├── api-client.js      # Client API per comunicazione con backend
+│   ├── config.js          # Configurazione generale
 │   ├── storage.js         # Gestione localStorage (utenti e ticket)
 │   ├── auth.js            # Gestione login/registrazione
 │   ├── dashboard.js       # Gestione dashboard e visualizzazione ticket
 │   └── main.js            # Funzionalità principali (header, hamburger, form)
-└── template.txt           # Template originale del progetto
+├── backend/               # Backend completo in Python + FastAPI
+│   ├── main.py            # Entry point del backend
+│   ├── requirements.txt   # Dipendenze Python
+│   ├── Dockerfile         # Configurazione Docker
+│   ├── docker-compose.yml # Orchestrazione Docker
+│   ├── start.sh           # Script di avvio
+│   ├── .env.example       # Esempio configurazione ambiente
+│   └── app/               # Codice sorgente backend
+│       ├── controllers/   # Controller API
+│       ├── services/      # Logica di business
+│       ├── routes/        # Endpoint API
+│       ├── schemas/       # Modelli Pydantic
+│       ├── models/        # Modelli Database
+│       ├── middleware/    # Middleware (auth, error)
+│       ├── utils/         # Utility functions
+│       └── config.py      # Configurazione backend
+├── Dockerfile             # Configurazione Docker frontend
+├── docker-compose.yml     # Composizione servizi completa
+└── README.md              # Documentazione del progetto
 ```
 
 ## Funzionalità Implementate
@@ -35,7 +55,7 @@ PortaileAssistenza/
 - **Logout**: Disconnessione e reindirizzamento
 
 ### Gestione Ticket
-- **Creazione ticket**: Form completo con categoria, priorità, oggetto, messaggio e allegati
+- **Creazione ticket**: Form completo con categoria, priorità, oggetto, messaggio e allegati (accessibile solo agli utenti registrati)
 - **Lista ticket**: Visualizzazione con statistiche (aperti, in lavorazione, risolti)
 - **Filtri**: Per stato, categoria e ricerca testuale
 - **Dettaglio ticket**: Cronologia messaggi completa
@@ -214,6 +234,61 @@ DATABASE_URL=postgresql://user:password@localhost:5432/portale_assistenza
 | ticket-dettaglio.html | Nome sito | Aggiornato logo |
 | js/main.js | Commento | Aggiornato header comment |
 | index.html | Stile h1 | Rimosso `<span class="highlight">` da "aiutarti?" per uniformare lo stile al resto del testo |
+
+### 2026-03-09 - Modifiche per rendere il form di creazione ticket accessibile solo agli utenti registrati
+
+| File | Modifica | Dettaglio |
+|------|----------|-----------|
+| index.html | Rimozione form | Rimosso completamente il form di creazione ticket dalla sezione "Contact CTA" |
+| dashboard.html | Aggiunta form | Aggiunto il form di creazione ticket all'interno del dashboard, accessibile solo agli utenti registrati |
+| dashboard.html | Aggiornamento navigazione | Modificato il link "Nuovo Ticket" nel sidebar per puntare al form nel dashboard anziché a index.html |
+| dashboard.html | Aggiunta logica UI | Aggiunti pulsanti per mostrare/nascondere il form di creazione ticket |
+| js/dashboard.js | Aggiunta logica JavaScript | Implementata la funzionalità per mostrare/nascondere il form e gestire l'invio dei ticket |
+| js/dashboard.js | Aggiornamento rendering lista vuota | Modificato il link "Nuovo Ticket" nell'area vuota della lista ticket per chiamare la funzione showTicketForm() |
+
+### Miglioramenti Grafici ed Estetici
+
+Di recente sono stati implementati significativi miglioramenti grafici ed estetici al Portale Assistenza:
+
+#### 1. Ottimizzazione del sistema di colori
+- Implementato un sistema di variabili CSS completo per garantire coerenza visiva
+- Aggiunto supporto per modalità chiara/scuro
+- Ottimizzate le palette di colori per migliorare il contrasto e l'accessibilità
+
+#### 2. Ottimizzazione della tipografia
+- Aggiunte variabili per dimensioni, pesi e spaziature dei caratteri
+- Migliorata la gerarchia visiva e la leggibilità
+- Standardizzati i font per tutta l'applicazione
+
+#### 3. Miglioramento dell'interfaccia utente
+- Rivisitati i componenti come bottoni, form e card per renderli più coerenti e accattivanti
+- Aggiunti effetti hover e transizioni fluide
+- Implementati stili più moderni e professionali
+
+#### 4. Miglioramento della dashboard
+- Aggiornata l'interfaccia della dashboard con stili più moderni
+- Integrate animazioni per una migliore esperienza utente
+- Ottimizzata la visualizzazione delle statistiche
+
+#### 5. Miglioramento delle pagine di autenticazione
+- Ottimizzato l'aspetto delle pagine di login e registrazione
+- Implementato design più coinvolgente e funzionale
+- Aggiunti effetti visivi e transizioni
+
+#### 6. Ottimizzazione delle animazioni
+- Aggiunte diverse animazioni fluide per migliorare l'esperienza utente
+- Implementati effetti di tipo fade-in, slide-in, scale-in
+- Ottimizzate le performance delle animazioni
+
+#### 7. Miglioramento della consistenza visiva
+- Uniformati gli elementi tra tutte le pagine
+- Garantita un'esperienza coerente in tutta l'applicazione
+- Standardizzate dimensioni, spaziature e stili
+
+#### 8. Ottimizzazione dell'esperienza mobile
+- Implementato un approccio mobile-first
+- Aggiunte media queries specifiche per ogni dimensione di schermo
+- Garantita un'esperienza ottimale su tutti i dispositivi
 
 ### Istruzioni per Rollback
 

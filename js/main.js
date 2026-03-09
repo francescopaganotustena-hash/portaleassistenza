@@ -164,37 +164,49 @@ async function initTicketForm() {
 
         const user = window.userManager?.getCurrentUser();
 
-        // Se utente loggato, salva ticket via API
-        if (user && window.ticketManager) {
-            // Gestione allegato
-            let allegato = null;
-            const fileInput = document.getElementById('allegato');
-            if (fileInput && fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                try {
-                    // Upload file
-                    const formData = new FormData();
-                    formData.append('file', file);
+        // Gestione allegato
+        let allegato = null;
+        const fileInput = document.getElementById('allegato');
+        if (fileInput && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            try {
+                // Upload file
+                const formData = new FormData();
+                formData.append('file', file);
 
-                    const uploadResponse = await fetch(`${window.apiClient.baseURL}/upload/file`, {
+                let uploadUrl = `${window.apiClient.baseURL}/upload/file`;
+                let headers = {};
+
+                // Se l'utente è loggato, usa l'autenticazione
+                if (user && window.apiClient.getToken()) {
+                    // Per FormData, non possiamo impostare manualmente l'Authorization header
+                    // Il token viene gestito internamente dall'APIClient
+                    allegato = await window.apiClient.request('/upload/file', {
                         method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${window.apiClient.getToken()}`
-                        },
+                        body: formData
+                    });
+                } else {
+                    // Chiamata diretta per utente non loggato
+                    const uploadResponse = await fetch(uploadUrl, {
+                        method: 'POST',
+                        headers: headers,
                         body: formData
                     });
 
                     if (!uploadResponse.ok) {
-                        throw new Error('Errore upload file');
+                        throw new Error(`Errore upload file: ${uploadResponse.status}`);
                     }
 
                     allegato = await uploadResponse.json();
-                } catch (uploadError) {
-                    console.error('Errore upload:', uploadError);
-                    alert('Errore durante l\'upload del file. Il ticket verrà creato senza allegato.');
                 }
+            } catch (uploadError) {
+                console.error('Errore upload:', uploadError);
+                alert('Errore durante l\'upload del file. Il ticket verrà creato senza allegato.');
             }
+        }
 
+        // Se utente loggato, salva ticket via API
+        if (user && window.ticketManager) {
             const ticketData = {
                 oggetto: document.getElementById('oggetto').value.trim(),
                 descrizione: document.getElementById('messaggio').value.trim(),
@@ -238,23 +250,48 @@ async function initTicketForm() {
             } catch (error) {
                 console.error('Errore API:', error);
             }
+        } else {
+            // Se utente non loggato, crea ticket anonimo con allegato
+            const ticketId = generateTicketId();
+
+            // Prepara i dati del ticket da salvare localmente
+            const ticketData = {
+                id: ticketId,
+                oggetto: document.getElementById('oggetto').value.trim(),
+                descrizione: document.getElementById('messaggio').value.trim(),
+                categoria: document.getElementById('categoria').value,
+                priorita: document.getElementById('priorita').value,
+                nome: document.getElementById('nome').value.trim(),
+                cognome: document.getElementById('cognome').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telefono: document.getElementById('telefono').value.trim(),
+                allegato: allegato ? JSON.stringify(allegato) : null,
+                stato: 'apertura',
+                data_creazione: new Date().toISOString()
+            };
+
+            // Salva il ticket localmente
+            try {
+                const savedTickets = JSON.parse(localStorage.getItem('anonymousTickets') || '[]');
+                savedTickets.push(ticketData);
+                localStorage.setItem('anonymousTickets', JSON.stringify(savedTickets));
+            } catch (storageError) {
+                console.error('Errore nel salvataggio locale del ticket:', storageError);
+            }
+
+            if (ticketNumber) {
+                ticketNumber.textContent = ticketId;
+            }
+
+            form.style.display = 'none';
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                successMessage.classList.add('fade-in');
+            }
+
+            // Scroll al messaggio
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-
-        // Se utente non loggato o errore, comportamento di fallback
-        const ticketId = generateTicketId();
-
-        if (ticketNumber) {
-            ticketNumber.textContent = ticketId;
-        }
-
-        form.style.display = 'none';
-        if (successMessage) {
-            successMessage.style.display = 'block';
-            successMessage.classList.add('fade-in');
-        }
-
-        // Scroll al messaggio
-        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
 

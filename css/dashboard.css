@@ -20,6 +20,7 @@
     overflow-y: auto;
     z-index: 100;
     transition: transform 0.3s ease;
+    box-shadow: var(--shadow-md);
 }
 
 .dashboard-main {
@@ -44,15 +45,16 @@
     justify-content: space-between;
     padding: 0 2rem;
     border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
 }
 
 .dashboard-brand {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
+    font-weight: var(--font-bold);
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.35rem;
+    font-size: var(--font-xl);
     color: var(--pure-white);
     text-decoration: none;
 }
@@ -77,7 +79,7 @@
     gap: 0.75rem;
     cursor: pointer;
     padding: 0.5rem;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     transition: background 0.3s ease;
 }
 
@@ -94,7 +96,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
+    font-weight: var(--font-bold);
     font-size: 1rem;
 }
 
@@ -105,13 +107,13 @@
 
 .user-name {
     color: var(--text-dark);
-    font-weight: 500;
-    font-size: 0.9rem;
+    font-weight: var(--font-medium);
+    font-size: var(--font-sm);
 }
 
 .user-email {
     color: var(--text-light);
-    font-size: 0.75rem;
+    font-size: var(--font-xs);
 }
 
 .user-dropdown {
@@ -120,8 +122,8 @@
     right: 0;
     background: var(--bg-white);
     border: 1px solid var(--gray-light);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
     min-width: 200px;
     display: none;
     z-index: 1001;
@@ -143,7 +145,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
     transition: background 0.3s ease;
 }
 
@@ -179,7 +181,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 0.5rem 1rem;
-    font-weight: 600;
+    font-weight: var(--font-bold);
 }
 
 .sidebar-menu {
@@ -197,9 +199,9 @@
     padding: 0.75rem 1rem;
     color: var(--text-light);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     transition: all 0.3s ease;
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
 }
 
 .sidebar-menu a:hover {
@@ -210,6 +212,7 @@
 .sidebar-menu a.active {
     background: rgba(79, 142, 247, 0.12);
     color: var(--orbit-blue);
+    font-weight: var(--font-semibold);
 }
 
 .sidebar-menu a i {
@@ -227,28 +230,37 @@
 
 .stat-card {
     background: var(--bg-white);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 1.5rem;
     border: 1px solid var(--gray-light);
     display: flex;
     align-items: center;
     gap: 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
 }
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
 
 .stat-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
 }
 
 .stat-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 
 .stat-icon.primary {
@@ -276,8 +288,8 @@
 }
 
 .stat-value {
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
     color: var(--text-dark);
     line-height: 1;
     margin-bottom: 0.25rem;
@@ -285,15 +297,19 @@
 
 .stat-label {
     color: var(--text-light);
-    font-size: 0.85rem;
+    font-size: var(--font-sm);
 }
 
 /* Dashboard Content */
 .dashboard-content {
     background: var(--bg-white);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     padding: 1.5rem;
     border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 .content-header {
@@ -306,8 +322,9 @@
 }
 
 .content-header h2 {
-    font-size: 1.25rem;
+    font-size: var(--font-xl);
     color: var(--text-dark);
+    font-weight: var(--font-semibold);
 }
 
 .content-actions {
@@ -326,15 +343,17 @@
     width: 100%;
     background: var(--primary-dark);
     border: 1px solid var(--gray-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 0.625rem 1rem 0.625rem 2.5rem;
     color: var(--text-dark);
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
+    box-shadow: var(--shadow-sm);
 }
 
 .search-box input:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
 }
 
 .search-box i {
@@ -349,16 +368,18 @@
 .filter-select {
     background: var(--primary-dark);
     border: 1px solid var(--gray-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 0.625rem 1rem;
     color: var(--text-dark);
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
     cursor: pointer;
+    box-shadow: var(--shadow-sm);
 }
 
 .filter-select:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
 }
 
 /* Ticket List */
@@ -371,15 +392,26 @@
 .ticket-item {
     background: var(--primary-dark);
     border: 1px solid var(--gray-light);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 1.25rem;
     transition: all 0.3s ease;
     cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    animation: slideInRight 0.5s ease forwards;
+    opacity: 0;
+    transform: translateX(20px);
 }
+
+.ticket-item:nth-child(1) { animation-delay: 0.1s; }
+.ticket-item:nth-child(2) { animation-delay: 0.2s; }
+.ticket-item:nth-child(3) { animation-delay: 0.3s; }
+.ticket-item:nth-child(4) { animation-delay: 0.4s; }
+.ticket-item:nth-child(5) { animation-delay: 0.5s; }
 
 .ticket-item:hover {
     border-color: var(--accent);
     transform: translateX(4px);
+    box-shadow: var(--shadow-md);
 }
 
 .ticket-header {
@@ -391,15 +423,15 @@
 
 .ticket-id {
     color: var(--accent);
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: var(--font-semibold);
+    font-size: var(--font-sm);
 }
 
 .ticket-badge {
     padding: 0.25rem 0.75rem;
-    border-radius: 20px;
+    border-radius: var(--radius-full);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: var(--font-semibold);
 }
 
 .ticket-badge.apertura {
@@ -423,10 +455,10 @@
 }
 
 .ticket-title {
-    font-size: 1rem;
+    font-size: var(--font-base);
     color: var(--text-dark);
     margin-bottom: 0.5rem;
-    font-weight: 500;
+    font-weight: var(--font-medium);
 }
 
 .ticket-meta {
@@ -452,6 +484,9 @@
 .empty-state {
     text-align: center;
     padding: 3rem;
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 .empty-state i {
@@ -463,6 +498,7 @@
 .empty-state h3 {
     color: var(--text-dark);
     margin-bottom: 0.5rem;
+    font-size: var(--font-xl);
 }
 
 .empty-state p {
@@ -473,18 +509,23 @@
 /* Profilo */
 .profile-section {
     background: var(--bg-white);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     padding: 2rem;
     border: 1px solid var(--gray-light);
     margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 .profile-section h3 {
-    font-size: 1.1rem;
+    font-size: var(--font-lg);
     color: var(--text-dark);
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--gray-light);
+    font-weight: var(--font-semibold);
 }
 
 .profile-grid {
@@ -501,22 +542,24 @@
 
 .profile-field label {
     color: var(--text-light);
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: var(--font-sm);
+    font-weight: var(--font-medium);
 }
 
 .profile-field input {
     background: var(--primary-dark);
     border: 1px solid var(--gray-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 0.75rem 1rem;
     color: var(--text-dark);
-    font-size: 0.95rem;
+    font-size: var(--font-sm);
+    box-shadow: var(--shadow-sm);
 }
 
 .profile-field input:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
 }
 
 .profile-field input:disabled {

@@ -1,6 +1,7 @@
 """
 Main application FastAPI
 """
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -8,6 +9,9 @@ from app.config import settings
 from app.database import engine, Base
 from app.middleware.error_handler import add_cors_middleware, global_exception_handler
 from app.routes import auth_routes, user_routes, ticket_routes, message_routes, admin_routes, upload_routes
+
+# Crea directory uploads se non esiste
+os.makedirs(settings.upload_dir, exist_ok=True)
 
 # Crea tabella database
 Base.metadata.create_all(bind=engine)

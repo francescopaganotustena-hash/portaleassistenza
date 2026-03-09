@@ -209,8 +209,27 @@ class TicketManager {
     async createTicket(ticketData) {
         try {
             if (USE_API && this.currentUser) {
-                const result = await window.apiClient.createTicket(ticketData);
-                return { success: true, ticket: result };
+                // Controlla se ci sono allegati e se sono in formato JSON
+                const processedTicketData = { ...ticketData };
+                
+                if (ticketData.allegato) {
+                    try {
+                        // Verifica se allegato è già un oggetto o una stringa JSON
+                        if (typeof ticketData.allegato === 'string') {
+                            JSON.parse(ticketData.allegato); // Solo per verificare se è valido
+                        }
+                        // Se non è una stringa JSON valida, convertilo
+                    } catch (e) {
+                        // Se non è JSON valido, converti in stringa
+                        processedTicketData.allegato = JSON.stringify(ticketData.allegato);
+                    }
+                    
+                    const result = await window.apiClient.createTicket(processedTicketData);
+                    return { success: true, ticket: result };
+                } else {
+                    const result = await window.apiClient.createTicket(ticketData);
+                    return { success: true, ticket: result };
+                }
             }
             
             // Fallback localStorage

@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadUserInfo();
     await loadTickets();
     initEventListeners();
+    initCreateTicketForm();
 });
 
 /**
@@ -96,9 +97,9 @@ function renderTickets() {
                 <i class="fas fa-ticket-alt"></i>
                 <h3>Nessun ticket trovato</h3>
                 <p>Crea un nuovo ticket per ricevere assistenza</p>
-                <a href="index.html#ticket" class="btn">
+                <button onclick="showTicketForm()" class="btn">
                     <i class="fas fa-plus"></i> Nuovo Ticket
-                </a>
+                </button>
             </div>
         `;
         return;
@@ -207,6 +208,198 @@ function initEventListeners() {
             dropdown.classList.remove('show');
         }
     });
+}
+
+/**
+ * Inizializza il form di creazione ticket
+ */
+function initCreateTicketForm() {
+    const showFormBtn = document.getElementById('show-create-ticket-form');
+    const sidebarNewTicketLink = document.getElementById('sidebar-new-ticket');
+    const cancelFormBtn = document.getElementById('cancel-ticket-form');
+    const ticketFormSection = document.getElementById('ticket-form-section');
+    const ticketForm = document.getElementById('ticket-form');
+    
+    if (showFormBtn) {
+        showFormBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showTicketForm();
+        });
+    }
+    
+    if (sidebarNewTicketLink) {
+        sidebarNewTicketLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showTicketForm();
+        });
+    }
+    
+    if (cancelFormBtn) {
+        cancelFormBtn.addEventListener('click', hideTicketForm);
+    }
+    
+    if (ticketForm) {
+        ticketForm.addEventListener('submit', handleTicketSubmit);
+    }
+}
+
+/**
+ * Mostra il form di creazione ticket
+ */
+function showTicketForm() {
+    const ticketFormSection = document.getElementById('ticket-form-section');
+    const ticketList = document.querySelector('.ticket-list');
+    
+    if (ticketFormSection) {
+        ticketFormSection.style.display = 'block';
+        
+        // Nasconde temporaneamente la lista ticket quando il form è visibile
+        if (ticketList) {
+            ticketList.style.display = 'none';
+        }
+    }
+}
+
+/**
+ * Nasconde il form di creazione ticket
+ */
+function hideTicketForm() {
+    const ticketFormSection = document.getElementById('ticket-form-section');
+    const ticketList = document.querySelector('.ticket-list');
+    
+    if (ticketFormSection) {
+        ticketFormSection.style.display = 'none';
+        
+        // Mostra nuovamente la lista ticket quando il form è nascosto
+        if (ticketList) {
+            ticketList.style.display = 'block';
+        }
+    }
+    
+    // Resetta il form
+    resetForm();
+}
+
+/**
+ * Gestisce l'invio del form del ticket
+ */
+async function handleTicketSubmit(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    // Ottiene i dati del form
+    const ticketData = {
+        nome: formData.get('nome'),
+        cognome: formData.get('cognome'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono') || '',
+        categoria: formData.get('categoria'),
+        priorita: formData.get('priorita'),
+        oggetto: formData.get('oggetto'),
+        messaggio: formData.get('messaggio'),
+        privacy: formData.get('privacy') === 'on'
+    };
+    
+    // Ottiene l'utente corrente per ottenere l'ID
+    const user = window.userManager.getCurrentUser();
+    if (!user || !user.id) {
+        alert('Utente non autenticato. Effettua il login per creare un ticket.');
+        return;
+    }
+    
+    // Aggiunge l'ID utente ai dati del ticket
+    ticketData.userId = user.id;
+    
+    // Gestione allegato
+    const allegatoInput = document.getElementById('allegato');
+    if (allegatoInput && allegatoInput.files && allegatoInput.files[0]) {
+        const file = allegatoInput.files[0];
+        ticketData.allegato = file;
+    }
+    
+    try {
+        // Disabilita il pulsante di invio durante l'elaborazione
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Invio in corso...';
+        }
+        
+        // Invia il ticket tramite il ticket manager
+        const response = await window.ticketManager.createTicket(ticketData);
+        
+        if (response && response.id) {
+            // Mostra messaggio di successo
+            showSuccessMessage(response.id);
+            
+            // Aggiorna la lista dei ticket
+            await loadTickets();
+        } else {
+            throw new Error('Risposta non valida dal server');
+        }
+    } catch (error) {
+        console.error('Errore durante la creazione del ticket:', error);
+        alert(`Errore durante la creazione del ticket: ${error.message || 'Si è verificato un errore'}`);
+    } finally {
+        // Riabilita il pulsante di invio
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Invia Ticket';
+        }
+    }
+}
+
+/**
+ * Mostra messaggio di successo
+ */
+function showSuccessMessage(ticketId) {
+    const successMsg = document.getElementById('success-message');
+    const ticketNumber = document.getElementById('ticket-number');
+    
+    if (ticketNumber) {
+        ticketNumber.textContent = ticketId;
+    }
+    
+    if (successMsg) {
+        successMsg.style.display = 'block';
+    }
+    
+    // Nasconde il form dopo l'invio
+    const ticketFormSection = document.getElementById('ticket-form-section');
+    if (ticketFormSection) {
+        ticketFormSection.style.display = 'none';
+    }
+    
+    // Mostra nuovamente la lista ticket
+    const ticketList = document.querySelector('.ticket-list');
+    if (ticketList) {
+        ticketList.style.display = 'block';
+    }
+}
+
+/**
+ * Resetta il form
+ */
+function resetForm() {
+    const form = document.getElementById('ticket-form');
+    const successMsg = document.getElementById('success-message');
+    
+    if (form) {
+        form.reset();
+    }
+    
+    if (successMsg) {
+        successMsg.style.display = 'none';
+    }
+    
+    // Ripristina eventuali allegati
+    const allegatoInput = document.getElementById('allegato');
+    if (allegatoInput) {
+        allegatoInput.value = '';
+    }
 }
 
 /**

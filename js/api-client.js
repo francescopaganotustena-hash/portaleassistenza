@@ -25,10 +25,20 @@ class APIClient {
     }
 
     async request(endpoint, options = {}) {
-        const headers = {
-            'Content-Type': 'application/json',
-            ...options.headers
-        };
+        // Controlla se stiamo facendo un upload di file
+        const isFormData = options.body instanceof FormData;
+        
+        const headers = {};
+        
+        // Non impostare Content-Type per FormData, altrimenti il browser lo imposta automaticamente
+        if (!isFormData) {
+            headers['Content-Type'] = 'application/json';
+        }
+        
+        // Aggiungi eventuali altri header
+        if (options.headers) {
+            Object.assign(headers, options.headers);
+        }
 
         const token = this.getToken();
         if (token) {

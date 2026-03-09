@@ -65,11 +65,17 @@ body.auth-page {
 
 .auth-card {
     background: var(--bg-white);
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     padding: 2rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-xl);
     border: 1px solid var(--gray-light);
     overflow: hidden;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.auth-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
 .auth-header {
@@ -79,11 +85,11 @@ body.auth-page {
 
 .auth-logo {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
+    font-weight: var(--font-bold);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.45rem;
+    font-size: var(--font-xl);
     color: var(--pure-white);
     text-decoration: none;
     margin-bottom: 1rem;
@@ -98,20 +104,21 @@ body.auth-page {
 }
 
 .auth-header h1 {
-    font-size: 1.4rem;
+    font-size: var(--font-xl);
     color: var(--text-dark);
     margin-bottom: 0.25rem;
+    font-weight: var(--font-semibold);
 }
 
 .auth-header p {
     color: var(--text-light);
-    font-size: 0.95rem;
+    font-size: var(--font-sm);
 }
 
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 0.875rem;
+    gap: 1rem;
 }
 
 .auth-form .form-group {
@@ -121,9 +128,9 @@ body.auth-page {
 }
 
 .auth-form label {
-    font-weight: 500;
+    font-weight: var(--font-medium);
     color: var(--text-dark);
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -165,14 +172,15 @@ body.auth-page {
 .auth-form input {
     background: var(--primary-dark);
     border: 1px solid var(--gray-light);
-    border-radius: 8px;
-    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
     color: var(--text-dark);
     font-family: inherit;
-    font-size: 0.9rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: var(--font-base);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
     width: 100%;
     max-width: 100%;
+    box-shadow: var(--shadow-sm);
 }
 
 .auth-form input::placeholder {
@@ -188,16 +196,16 @@ body.auth-page {
 .auth-form .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
 .form-error {
     background: rgba(239, 68, 68, 0.1);
     border: 1px solid var(--danger);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    padding: 0.875rem 1rem;
     color: var(--danger);
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
     display: none;
 }
 
@@ -215,10 +223,10 @@ body.auth-page {
 .form-success {
     background: rgba(16, 185, 129, 0.1);
     border: 1px solid var(--success);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    padding: 0.875rem 1rem;
     color: var(--success);
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
     display: none;
 }
 
@@ -230,17 +238,17 @@ body.auth-page {
     background: var(--accent);
     color: var(--primary-dark);
     border: none;
-    border-radius: 8px;
-    padding: 0.75rem;
-    font-size: 0.95rem;
-    font-weight: 600;
+    border-radius: var(--radius-md);
+    padding: 0.875rem;
+    font-size: var(--font-base);
+    font-weight: var(--font-semibold);
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 0.5rem;
+    transition: all var(--transition-normal);
+    margin-top: 0.75rem;
 }
 
 .auth-form .btn-submit:hover {
-    background: #00b8e6;
+    background: var(--accent-primary-hover);
     transform: translateY(-2px);
     box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
 }
@@ -254,20 +262,20 @@ body.auth-page {
 
 .auth-footer {
     text-align: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
     border-top: 1px solid var(--gray-light);
 }
 
 .auth-footer p {
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
 }
 
 .auth-footer a {
     color: var(--accent);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: var(--font-medium);
     transition: color 0.3s ease;
 }
 
@@ -279,8 +287,8 @@ body.auth-page {
 .password-requirements {
     background: rgba(0, 212, 255, 0.05);
     border: 1px solid var(--gray-light);
-    border-radius: 6px;
-    padding: 0.625rem;
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
     margin-bottom: 0.5rem;
 }
 
@@ -318,12 +326,12 @@ body.auth-page {
     color: var(--success);
 }
 
-/*记住我 checkbox*/
+/* Ricordami checkbox */
 .remember-me {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: -0.5rem;
+    margin-top: -0.25rem;
 }
 
 .remember-me input[type="checkbox"] {
@@ -335,7 +343,7 @@ body.auth-page {
 
 .remember-me label {
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
     cursor: pointer;
 }
 
@@ -350,6 +358,10 @@ body.auth-page {
     }
 
     .auth-header h1 {
-        font-size: 1.5rem;
+        font-size: var(--font-2xl);
+    }
+    
+    .auth-form {
+        gap: 0.875rem;
     }
 }
